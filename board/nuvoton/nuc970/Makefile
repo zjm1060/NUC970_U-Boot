@@ -18,4 +18,5 @@ else
 obj-y	:= nuc970.o
 obj-y	+= cmd_decrypt.o
 obj-y	+= cmd_rtc_spare.o
+obj-y	+= cmd_lcd.o
 endif

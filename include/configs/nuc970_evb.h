@@ -37,7 +37,7 @@
 #define CONFIG_SYS_MEMTEST_END           0xB00000
 
 #define CONFIG_ARCH_CPU_INIT
-#undef  CONFIG_USE_IRQ               
+#undef  CONFIG_USE_IRQ   
 
 #define CONFIG_CMDLINE_TAG	1	/* enable passing of ATAGs	*/
 #define CONFIG_SETUP_MEMORY_TAGS 1
@@ -47,11 +47,11 @@
 
 /*#define CONFIG_NUC970_HW_CHECKSUM */
 
-#define CONFIG_SYS_USE_SPIFLASH 
+/* #define CONFIG_SYS_USE_SPIFLASH */
 #define CONFIG_SYS_USE_NANDFLASH  
 #define CONFIG_SYS_NO_FLASH    // that is, no *NOR* flash 
-#define CONFIG_ENV_IS_IN_NAND 
-/*#define CONFIG_ENV_IS_IN_SPI_FLASH */
+#define CONFIG_ENV_IS_IN_NAND
+/* #define CONFIG_ENV_IS_IN_SPI_FLASH */
 /*#define CONFIG_ENV_IS_IN_MMC */
 
 #define CONFIG_BOARD_EARLY_INIT_F
@@ -62,8 +62,9 @@
 #define CONFIG_SYS_BOOTM_LEN		0x1000000 /* 16MB max kernel size */
 
 /*#define CONFIG_DISPLAY_CPUINFO */
-
-#define CONFIG_BOOTDELAY	3
+#ifndef CONFIG_BOOTDELAY
+#define CONFIG_BOOTDELAY	1
+#endif
 
 #define CONFIG_SYS_SDRAM_BASE   0
 #define CONFIG_NR_DRAM_BANKS    2     /* there are 2 sdram banks for nuc970 */
@@ -107,7 +108,7 @@
 
 #define CONFIG_CMD_PING		1
 #define CONFIG_CMD_DHCP		1
-#define CONFIG_CMD_JFFS2        1
+#define CONFIG_CMD_JFFS2        0
 
 
 #ifdef CONFIG_SYS_USE_SPIFLASH
@@ -125,15 +126,15 @@
 
 #ifdef CONFIG_SYS_USE_NANDFLASH
 #define CONFIG_CMD_NAND		1
-#define CONFIG_CMD_UBI         1 
-#define CONFIG_CMD_UBIFS       1 
-#define CONFIG_MTD_UBI_WL_THRESHOLD  4096 /* CWWeng 2017.2.13 */
-#define CONFIG_MTD_UBI_BEB_LIMIT  20 /* CWWeng 2017.2.13 */
-#define CONFIG_CMD_MTDPARTS    1 
-#define CONFIG_MTD_DEVICE      1 
-#define CONFIG_MTD_PARTITIONS  1 
-#define CONFIG_RBTREE          1 
-#define CONFIG_LZO             1 
+#define CONFIG_CMD_UBI         1
+#define CONFIG_CMD_UBIFS       1
+#define CONFIG_MTD_UBI_WL_THRESHOLD  4096
+#define CONFIG_MTD_UBI_BEB_LIMIT  20
+#define CONFIG_CMD_MTDPARTS    1
+#define CONFIG_MTD_DEVICE      1
+#define CONFIG_MTD_PARTITIONS  1
+#define CONFIG_RBTREE          1
+#define CONFIG_LZO             1
 
 #define MTDIDS_DEFAULT "nand0=nand0"
 #define MTDPARTS_DEFAULT "mtdparts=nand0:0x200000@0x0(u-boot),0x1400000@0x200000(kernel),-(user)"
@@ -244,6 +245,7 @@
 #if 1
 #define CONFIG_CMD_USB
 #define CONFIG_CMD_FAT
+#define CONFIG_CMD_GPIO
 #define CONFIG_USB_STORAGE
 #define CONFIG_USB_EHCI
 #define CONFIG_USB_EHCI_NUC970
