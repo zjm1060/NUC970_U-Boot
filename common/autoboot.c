@@ -14,6 +14,7 @@
 #include <menu.h>
 #include <post.h>
 #include <u-boot/sha256.h>
+#include <asm/gpio.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -341,9 +342,21 @@ const char *bootdelay_process(void)
 
 void autoboot_command(const char *s)
 {
+	int gpio;
 	debug("### main_loop: bootcmd=\"%s\"\n", s ? s : "<UNDEFINED>");
 
-	if (stored_bootdelay != -1 && s && !abortboot(stored_bootdelay)) {
+	gpio = 97;
+
+	int ret = gpio_request(gpio, "key_gpio");
+	if (ret && ret != -EBUSY) {
+		printf("gpio: requesting pin %u failed\n", gpio);
+		return ;
+	}
+
+	gpio_direction_input(gpio);
+
+	// if ((gpio_get_value(gpio) == 1) || (stored_bootdelay != -1 && s && !abortboot(stored_bootdelay))) {
+	if (gpio_get_value(gpio) == 1) {
 #if defined(CONFIG_AUTOBOOT_KEYED) && !defined(CONFIG_AUTOBOOT_KEYED_CTRLC)
 		int prev = disable_ctrlc(1);	/* disable Control C checking */
 #endif

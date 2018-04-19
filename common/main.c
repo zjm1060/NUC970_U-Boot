@@ -40,6 +40,7 @@ static void run_preboot_environment_command(void)
 #endif /* CONFIG_PREBOOT */
 }
 
+void lcd_in_boot(void);
 /* We come here after U-Boot is initialised and ready to process commands */
 void main_loop(void)
 {
@@ -65,6 +66,8 @@ void main_loop(void)
 
 	autoboot_command(s);
 
+	lcd_in_boot();
+	
 	cli_loop();
 	panic("No CLI available");
 }
