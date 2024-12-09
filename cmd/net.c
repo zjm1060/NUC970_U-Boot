@@ -418,7 +418,7 @@ static int do_link_local(cmd_tbl_t *cmdtp, int flag, int argc,
 {
 	char tmp[22];
 
-	if (net_loop(LINKLOCAL) < 0)
+	if (net_loop(DHCP) < 0)
 		return CMD_RET_FAILURE;
 
 	net_gateway.s_addr = 0;

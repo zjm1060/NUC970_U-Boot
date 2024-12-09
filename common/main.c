@@ -45,12 +45,35 @@ void lcd_in_boot(void);
 void main_loop(void)
 {
 	const char *s;
+	int system_ram_size = 0;
 
 	bootstage_mark_name(BOOTSTAGE_ID_MAIN_LOOP, "main_loop");
 
 #ifdef CONFIG_VERSION_VARIABLE
 	setenv("ver", version_string);  /* set version variable */
 #endif /* CONFIG_VERSION_VARIABLE */
+
+    system_ram_size = gd->ram_size/(1024*1024);
+
+    switch(system_ram_size){
+        default:
+        case 8:
+            setenv("sysmem","8M");
+            break;
+        case 16:
+            setenv("sysmem","16M");
+            break;
+        case 32:
+            setenv("sysmem","32M");
+            break;
+        case 64:
+            setenv("sysmem","64M");
+            break;
+        case 128:
+            setenv("sysmem","128M");
+            break;
+        break;
+    }
 
 	cli_init();
 

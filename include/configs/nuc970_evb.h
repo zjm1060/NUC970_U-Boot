@@ -108,6 +108,7 @@
 
 #define CONFIG_CMD_PING		1
 #define CONFIG_CMD_DHCP		1
+#define CONFIG_CMD_LINK_LOCAL 1
 #define CONFIG_CMD_JFFS2        0
 
 

@@ -39,7 +39,8 @@
 #else
 # define TIMEOUT_COUNT	(CONFIG_NET_RETRY_COUNT)
 #endif
-#define TIMEOUT_MS	((3 + (TIMEOUT_COUNT * 5)) * 1000)
+// #define TIMEOUT_MS	((3 + (TIMEOUT_COUNT * 5)) * 1000)
+#define TIMEOUT_MS	(5 * 1000)
 
 #define PORT_BOOTPS	67		/* BOOTP server UDP port */
 #define PORT_BOOTPC	68		/* BOOTP client UDP port */
@@ -395,8 +396,8 @@ static void bootp_timeout_handler(void)
 #endif
 	} else {
 		bootp_timeout *= 2;
-		if (bootp_timeout > 2000)
-			bootp_timeout = 2000;
+		if (bootp_timeout > 1000)
+			bootp_timeout = 1000;
 		net_set_timeout_handler(bootp_timeout, bootp_timeout_handler);
 		bootp_request();
 	}

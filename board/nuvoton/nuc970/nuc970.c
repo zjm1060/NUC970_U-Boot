@@ -84,6 +84,7 @@ void dram_init_banksize(void)
 
 int dram_init(void)
 {
+    
 	gd->ram_size = sdram_size(readl(REG_SDIC_SIZE0)) + sdram_size(readl(REG_SDIC_SIZE1));
 
 	return(0);

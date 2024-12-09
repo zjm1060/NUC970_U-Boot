@@ -78,7 +78,7 @@ obj-y += tables_csum.o
 obj-y += time.o
 obj-$(CONFIG_TRACE) += trace.o
 obj-$(CONFIG_LIB_UUID) += uuid.o
-obj-$(CONFIG_LIB_RAND) += rand.o
+obj-y += rand.o
 
 ifdef CONFIG_SPL_BUILD
 ifdef CONFIG_TPL_BUILD
