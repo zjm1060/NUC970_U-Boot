@@ -302,13 +302,21 @@ static void lcd_init(void)
 
 static void lcd_putImage(const char *image)
 {
-	const char _page[] = {0xb7,0xb6,0xb5,0xb4,0xb3,0xb2,0xb1,0xb0};
+	const char _page_model_0[] = {0xb7,0xb6,0xb5,0xb4,0xb3,0xb2,0xb1,0xb0};
+	const char _page_model_1[] = {0xb3,0xb2,0xb1,0xb0,0xb7,0xb6,0xb5,0xb4};
+	const char *page = _page_model_0;
+
 	int i,j;
 
+	int lcdType = getenv_ulong("lcdModel", 10, 0);
+	if(lcdType == 1){
+		page = _page_model_1;
+	}
+
 	for(i = 0; i < 8 ; i++){
-		cmd(_page[i]);
+		cmd(page[i]);
 		cmd(0x10);
-		cmd(0x00);
+		cmd(0x01);
 
 		for(j = 0; j < 128 ; j++){
 			data(*(image+i*128+j));
